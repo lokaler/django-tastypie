@@ -4,7 +4,7 @@ from dateutil.parser import parse
 from decimal import Decimal
 import re
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
-from django.utils import datetime_safe, importlib
+from django.utils import datetime_safe, importlib, encoding
 from django.utils import six
 from tastypie.bundle import Bundle
 from tastypie.exceptions import ApiFieldError, NotFound
@@ -193,7 +193,7 @@ class CharField(ApiField):
         if value is None:
             return None
 
-        return six.text_type(value)
+        return encoding.force_unicode(value)
 
 
 class FileField(ApiField):
